@@ -1,16 +1,24 @@
 /*
  * tests.h
  *
- *  Created on: Jan 26, 2019
- *      Author: student
+ *  Created on: Feb 4, 2019
+ *      Author: Hava Kantrowitz
  */
 
 #ifndef TESTS_H_
 #define TESTS_H_
 
 #include <stdbool.h>
+#include "production.h"
 
+// Function prototypes:
 bool tests(void);
-bool testShellSort(void);
+bool testMystrlen1(void);
+bool testMystrlen2(void);
+bool testMystrdup();
+bool testMystrcpy();
+bool testMystrncpy();
+bool testMystrcpy();
+bool testMystrncat();
 
 #endif /* TESTS_H_ */
