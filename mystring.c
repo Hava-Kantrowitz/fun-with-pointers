@@ -64,7 +64,7 @@ char* mystrdup(char* s) {
 /**
  * Copies the string from one location to another
  * @param dest: pointer to the first character in the array the string will be copied to
- * @param src: pointer to the first character in the character array (string) that is being copied
+ * @param src: pointer to the first character in the string that is being copied
  * @return pointer to the first array element in the destination
  */
 char* mystrcpy(char* dest, char* src) {
@@ -83,10 +83,12 @@ char* mystrcpy(char* dest, char* src) {
 /**
  * Copies a specified amount of characters in a string string from one location to another
  * @param dest: pointer to the first character in the array the string will be copied to
- * @param src: pointer to the first character in the character array (string) that is being copied
+ * @param src: pointer to the first character in the string that is being copied
  * @param n: number of characters to be copied
  * @return pointer to the first array element in the destination
- * ADD SRC LESS THAN N STUFF
+ * 						If n is greater than the length of src, pad the difference with nulls
+ * 						If n is less than or equal to the length of src, it copies over n characters
+ * 							and doesn't null terminate
  */
 char* mystrncpy(char* dest, char* src, size_t n) {
 	//Keep incrementing pointer until we hit null terminator
@@ -98,6 +100,13 @@ char* mystrncpy(char* dest, char* src, size_t n) {
 			dest++;
 			j++;
 		}
+		if (j < n){
+			while (j < n){
+				*dest = '\0';
+				j++;
+			}
+		}
+
 		return firstDest;
 }
 
@@ -107,7 +116,7 @@ char* mystrncpy(char* dest, char* src, size_t n) {
  * @param src: pointer to the first character in the character array (string) that is being copied
  * @param n: number of characters to be copied
  * @return pointer to the first array element in the destination
- * ADD SRC LESS THAN N STUFF
+ * 						Resulting string is always null terminated
  */
 char* mystrncat(char* dest, char* src, size_t n) {
 	//Keep incrementing pointer until we hit null terminator
