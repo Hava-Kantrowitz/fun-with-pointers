@@ -18,7 +18,8 @@ bool testMystrlen2(void);
 bool testMystrdup();
 bool testMystrcpy();
 bool testMystrncpy();
-bool testMystrcpy();
 bool testMystrncat();
+bool testMystrcat();
+bool testMystrndup();
 
 #endif /* TESTS_H_ */

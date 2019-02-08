@@ -16,5 +16,7 @@ char* mystrdup(char* s);
 char* mystrcpy(char* dest, char* src);
 char* mystrncpy(char* dest, char* src, size_t n);
 char* mystrncat(char* dest, char* src, size_t n);
+char* mystrcat(char* dest, char* src);
+char* mystrndup(char* s, size_t n);
 
 #endif /* MYSTRING_H_ */
