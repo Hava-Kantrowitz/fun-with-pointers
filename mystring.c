@@ -16,14 +16,14 @@
  */
 size_t mystrlen1(const char* s)
 {
-	size_t n = 0;
+	size_t n = 0;//initialize size to zero
 
 	// Step through the array, counting up until we find the null terminator
 	while (s[n] != '\0') {
-		n++;
+		n++;//increment size
 	}
 
-	return n;
+	return n;//return the length of string
 }
 /**
  * Calculate the length of the string
@@ -33,15 +33,15 @@ size_t mystrlen1(const char* s)
  */
 size_t mystrlen2(const char* s)
 {
-	size_t n = 0;
+	size_t n = 0;//initialize size to zero
 
 	// Keep incrementing the pointer until we find it is pointing to the null terminator
 	while (*s != '\0') {
-		n++;
-		s++;
+		n++;//increment size
+		s++;//increment array pointer
 	}
 
-	return n;
+	return n;//return length of string
 }
 
 /** Duplicates a character string into a freshly-allocated block of memory.
@@ -58,7 +58,7 @@ char* mystrdup(char* s) {
 	if (newstr) { // If allocation succeeded, copy into it
 		strcpy(newstr, s);
 	}
-	return newstr;
+	return newstr;//return pointer to array created
 }
 
 /**
@@ -69,15 +69,17 @@ char* mystrdup(char* s) {
  */
 char* mystrcpy(char* dest, char* src) {
 
+	char* firstDest = dest;//store pointer to first of destination array
+
 	//Keep incrementing pointer until we hit null terminator
-	char* firstDest = dest;
 	while(*src != '\0'){
-		*dest = *src;
+		*dest = *src;//set what dest is pointing to towards what src is pointing to
+		//increment src and dest to move through arrays
 		src++;
 		dest++;
 	}
-	*dest = '\0';
-	return firstDest;
+	*dest = '\0';//put null terminator at end
+	return firstDest;//return pointer to destination array
 }
 
 /**
@@ -91,23 +93,29 @@ char* mystrcpy(char* dest, char* src) {
  * 							and doesn't null terminate
  */
 char* mystrncpy(char* dest, char* src, size_t n) {
-	//Keep incrementing pointer until we hit null terminator
-		char* firstDest = dest;
-		int j = 0;
+
+		char* firstDest = dest;//store pointer to first of destination array
+		int j = 0;//counter for number of times around array, initialized to 0
+		//Keep incrementing pointer until we hit null terminator
+		//Or until the max n is reached
 		while(*src != '\0' && j < n){
-			*dest = *src;
+			*dest = *src;//set what dest is pointing to towards what src is pointing to
+			//increment src and dest to move through arrays
+			//increment j to move up in number of elements copied
 			src++;
 			dest++;
 			j++;
 		}
+		//If the number of elements to copy hasn't been reached yet
 		if (j < n){
+			//Keep going until it is reached, putting nulls in the space
 			while (j < n){
 				*dest = '\0';
 				j++;
 			}
 		}
 
-		return firstDest;
+		return firstDest;//return pointer to destination array
 }
 
 /**
@@ -119,16 +127,22 @@ char* mystrncpy(char* dest, char* src, size_t n) {
  * 						Resulting string is always null terminated
  */
 char* mystrncat(char* dest, char* src, size_t n) {
-	//Keep incrementing pointer until we hit null terminator
-		char* firstDest = dest;
-		int j = 0;
 
+		char* firstDest = dest;//store pointer to first of destination array
+		int j = 0;//counter for number of times around array, initialized to 0
+
+		//Keep incrementing pointer to destination array until null terminator is hit
 		while (*dest != '\0'){
 			dest++;
 		}
+		//If null terminator has been hit
+		//Keep incrementing pointer until we hit null terminator of src
+		//Or until the max n is reached
 		if (*dest == '\0'){
 		while(*src != '\0' && j < n){
-			*dest = *src;
+			*dest = *src;//set what dest is pointing to towards what src is pointing to
+			//increment src and dest to move through arrays
+			//increment j to move up in number of elements copied
 			src++;
 			dest++;
 			j++;
@@ -136,9 +150,9 @@ char* mystrncat(char* dest, char* src, size_t n) {
 		}
 		}
 
-		*dest = '\0';
+		*dest = '\0';//put a null terminator at the end
 
-		return firstDest;
+		return firstDest;//return pointer to zeroth element of dest
 }
 
 /**
@@ -148,24 +162,27 @@ char* mystrncat(char* dest, char* src, size_t n) {
  * @return pointer to the first array element in the destination
  */
 char* mystrcat(char* dest, char* src) {
-	//Keep incrementing pointer until we hit null terminator
-		char* firstDest = dest;
+		char* firstDest = dest;//store pointer to first of destination array
 
+		//Keep incrementing pointer to dest until we hit null terminator
 		while (*dest != '\0'){
 			dest++;
 		}
+		//Overwrite null terminator, and
+		//Keep incrementing pointer until we hit null terminator of src
 		if (*dest == '\0'){
 		while(*src != '\0'){
-			*dest = *src;
+			*dest = *src;//set what dest is pointing to towards what src is pointing to
+			//increment src and dest to move through arrays
 			src++;
 			dest++;
 
 		}
 		}
 
-		*dest = '\0';
+		*dest = '\0';//put a null terminator at the end
 
-		return firstDest;
+		return firstDest;//return pointer to zeroth element of dest
 }
 
 /** Duplicates n bytes of a character string into a freshly-allocated block of memory.
@@ -179,16 +196,18 @@ char* mystrcat(char* dest, char* src) {
  */
 char* mystrndup(char* s, size_t n) {
 	size_t length = sizeof(n); // Number of bytes in n
-	size_t length2 = sizeof(s);
+	size_t length2 = sizeof(s);//Number of bytes in array to duplicate
 
 	// Allocate a block of memory big enough to n characters of the original string,
 	// plus the null terminator.
 	char* newstr = (char*) malloc(length*n + 1);
 	if (newstr) { // If allocation succeeded, copy into it
+		//copy only the first n characters
 		strncpy(newstr, s, n);
+		//If length of s is less than or equal to n, add a null character to the end
 		if (length2 < n || length2 == n){
 			*(newstr+(length*n)) = '\0';
 		}
 	}
-	return newstr;
+	return newstr;//return pointer to allocated array
 }
