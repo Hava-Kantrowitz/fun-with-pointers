@@ -50,13 +50,13 @@ size_t mystrlen2(const char* s)
  *         NULL if unable to allocate memory, errno holds the error code.
  */
 char* mystrdup(char* s) {
-	size_t length = strlen(s); // Length of the original string
+	size_t length = mystrlen1(s); // Length of the original string
 
 	// Allocate a block of memory big enough to hold all the characters of the original string,
 	// plus the null terminator.
 	char* newstr = (char*) malloc(length + 1);
 	if (newstr) { // If allocation succeeded, copy into it
-		strcpy(newstr, s);
+		mystrcpy(newstr, s);
 	}
 	return newstr;//return pointer to array created
 }
@@ -195,19 +195,19 @@ char* mystrcat(char* dest, char* src) {
  *         If n is the same length as s, all n bytes will be duplicated and a null character will be added to the end
  */
 char* mystrndup(char* s, size_t n) {
-	size_t length = sizeof(n); // Number of bytes in n
-	size_t length2 = sizeof(s);//Number of bytes in array to duplicate
 
 	// Allocate a block of memory big enough to n characters of the original string,
 	// plus the null terminator.
-	char* newstr = (char*) malloc(length*n + 1);
+	char* newstr = (char*) malloc(n + 1);
 	if (newstr) { // If allocation succeeded, copy into it
 		//copy only the first n characters
-		strncpy(newstr, s, n);
-		//If length of s is less than or equal to n, add a null character to the end
-		if (length2 < n || length2 == n){
-			*(newstr+(length*n)) = '\0';
-		}
+		mystrncpy(newstr, s, n);
+		//Already has nulls from mystrncpy
 	}
-	return newstr;//return pointer to allocated array
+	char* startNew = newstr;
+	for (int i = 0; i < n; i++){
+		newstr++;
+	}
+	newstr = '\0';
+	return startNew;//return pointer to allocated array
 }
